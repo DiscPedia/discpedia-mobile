@@ -1,2 +1,7 @@
 @import 'tailwindcss';
 @import 'uniwind';
+
+@theme {
+  /* 웹 로고와 같은 Raleway. expo-font로 로드한 이름을 그대로 쓴다. */
+  --font-raleway: 'Raleway_300Light';
+}

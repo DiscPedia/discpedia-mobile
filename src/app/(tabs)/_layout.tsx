@@ -4,6 +4,7 @@ import CollectionIcon from '@/assets/icons/collection.svg';
 import HomeIcon from '@/assets/icons/home.svg';
 import MyIcon from '@/assets/icons/my.svg';
 import SearchIcon from '@/assets/icons/search.svg';
+import Header from '@/components/common/Header';
 
 const ICON_SIZE = 20;
 
@@ -12,7 +13,7 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerShown: false,
+        header: () => <Header />,
         tabBarActiveTintColor: '#000000',
         tabBarInactiveTintColor: '#9ca3af',
         tabBarLabelStyle: { fontSize: 10 },
