@@ -41,6 +41,9 @@ export default function RootLayout() {
           <Stack.Screen name="detail/[id]" />
           <Stack.Screen name="new-releases" />
           <Stack.Screen name="used-albums" />
+          <Stack.Screen name="review/write/[id]" />
+          <Stack.Screen name="review/edit/[reviewId]" />
+          <Stack.Screen name="collection/add/[id]" />
         </Stack.Protected>
         <Stack.Protected guard={!isLoggedIn}>
           <Stack.Screen name="login" />

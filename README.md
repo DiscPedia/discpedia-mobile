@@ -94,11 +94,11 @@ src/
 | `/myPage`                       | `src/app/(tabs)/my-page.tsx`                    | 자리만  |
 | `/new-releases`                 | `src/app/new-releases.tsx`                      | 완료    |
 | `/used-albums`                  | `src/app/used-albums.tsx`                       | 완료    |
-| `/detail/:id`                   | `src/app/detail/[id].tsx`                       | 자리만  |
-| `/collection/add/:id`           | `src/app/collection/add/[id].tsx`               | 미작업  |
+| `/detail/:id`                   | `src/app/detail/[id].tsx`                       | 완료    |
+| `/collection/add/:id`           | `src/app/collection/add/[id].tsx`               | 자리만  |
 | `/collection/:collectionItemId` | `src/app/collection/[collectionItemId].tsx`     | 미작업  |
-| `/review/write/:id`             | `src/app/review/write/[id].tsx`                 | 미작업  |
-| `/review/edit/:reviewId`        | `src/app/review/edit/[reviewId].tsx`            | 미작업  |
+| `/review/write/:id`             | `src/app/review/write/[id].tsx`                 | 자리만  |
+| `/review/edit/:reviewId`        | `src/app/review/edit/[reviewId].tsx`            | 자리만  |
 | `/recommand`                    | `src/app/recommand.tsx`                         | 미작업  |
 | `/myReview`                     | `src/app/my-review.tsx`                         | 미작업  |
 | `/portfolio`                    | `src/app/portfolio.tsx`                         | 미작업  |

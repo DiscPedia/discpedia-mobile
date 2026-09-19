@@ -1,11 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getNewReleases, getUsedAlbums, searchAlbums, type AladinPageParams } from '@/apis/aladin';
+import {
+  getAlbumDetail,
+  getNewReleases,
+  getUsedAlbums,
+  searchAlbums,
+  type AladinPageParams,
+} from '@/apis/aladin';
 
 export const albumKeys = {
   newReleases: (params: AladinPageParams) => ['aladin', 'new-releases', params] as const,
   usedAlbums: (params: AladinPageParams) => ['aladin', 'used', params] as const,
   search: (keyword: string) => ['aladin', 'search', keyword] as const,
+  detail: (aladinItemId: number) => ['aladin', 'detail', aladinItemId] as const,
 };
 
 export const useNewReleases = (params: AladinPageParams = {}) =>
@@ -27,4 +34,11 @@ export const useSearchAlbums = (keyword: string) =>
     queryFn: () => searchAlbums({ q: keyword, limit: 10, offset: 0 }),
     enabled: keyword.length > 0,
     placeholderData: (previous) => previous,
+  });
+
+export const useAlbumDetail = (aladinItemId: number) =>
+  useQuery({
+    queryKey: albumKeys.detail(aladinItemId),
+    queryFn: () => getAlbumDetail(aladinItemId),
+    enabled: Number.isFinite(aladinItemId),
   });
