@@ -89,11 +89,11 @@ src/
 | ------------------------------- | ----------------------------------------------- | ------- |
 | `/login`                        | `src/app/login.tsx`                             | 기본 UI |
 | `/home`                         | `src/app/(tabs)/index.tsx`                      | 완료    |
-| `/search`                       | `src/app/(tabs)/search.tsx`                     | 자리만  |
+| `/search`                       | `src/app/(tabs)/search.tsx`                     | 완료    |
 | `/collection`                   | `src/app/(tabs)/collection.tsx`                 | 자리만  |
 | `/myPage`                       | `src/app/(tabs)/my-page.tsx`                    | 자리만  |
-| `/new-releases`                 | `src/app/new-releases.tsx`                      | 자리만  |
-| `/used-albums`                  | `src/app/used-albums.tsx`                       | 자리만  |
+| `/new-releases`                 | `src/app/new-releases.tsx`                      | 완료    |
+| `/used-albums`                  | `src/app/used-albums.tsx`                       | 완료    |
 | `/detail/:id`                   | `src/app/detail/[id].tsx`                       | 자리만  |
 | `/collection/add/:id`           | `src/app/collection/add/[id].tsx`               | 미작업  |
 | `/collection/:collectionItemId` | `src/app/collection/[collectionItemId].tsx`     | 미작업  |
