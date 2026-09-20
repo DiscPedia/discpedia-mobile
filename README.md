@@ -90,18 +90,18 @@ src/
 | `/login`                        | `src/app/login.tsx`                             | 기본 UI |
 | `/home`                         | `src/app/(tabs)/index.tsx`                      | 완료    |
 | `/search`                       | `src/app/(tabs)/search.tsx`                     | 완료    |
-| `/collection`                   | `src/app/(tabs)/collection.tsx`                 | 자리만  |
-| `/myPage`                       | `src/app/(tabs)/my-page.tsx`                    | 자리만  |
+| `/collection`                   | `src/app/(tabs)/collection.tsx`                 | 완료    |
+| `/myPage`                       | `src/app/(tabs)/my-page.tsx`                    | 완료    |
 | `/new-releases`                 | `src/app/new-releases.tsx`                      | 완료    |
 | `/used-albums`                  | `src/app/used-albums.tsx`                       | 완료    |
 | `/detail/:id`                   | `src/app/detail/[id].tsx`                       | 완료    |
 | `/collection/add/:id`           | `src/app/collection/add/[id].tsx`               | 자리만  |
-| `/collection/:collectionItemId` | `src/app/collection/[collectionItemId].tsx`     | 미작업  |
+| `/collection/:collectionItemId` | `src/app/collection/[collectionItemId].tsx`     | 자리만  |
 | `/review/write/:id`             | `src/app/review/write/[id].tsx`                 | 자리만  |
 | `/review/edit/:reviewId`        | `src/app/review/edit/[reviewId].tsx`            | 자리만  |
-| `/recommand`                    | `src/app/recommand.tsx`                         | 미작업  |
-| `/myReview`                     | `src/app/my-review.tsx`                         | 미작업  |
-| `/portfolio`                    | `src/app/portfolio.tsx`                         | 미작업  |
+| `/recommand`                    | `src/app/recommand.tsx`                         | 자리만  |
+| `/myReview`                     | `src/app/my-review.tsx`                         | 자리만  |
+| `/portfolio`                    | `src/app/portfolio.tsx`                         | 자리만  |
 | `/login/oauth2/code/*`          | 없음 (`startOAuthLogin`이 인앱 브라우저로 처리) | -       |
 
 새 화면을 만들면 `src/app/_layout.tsx`의 `Stack.Protected guard={isLoggedIn}` 블록에 `Stack.Screen`을 추가해 주세요. 등록하지 않으면 로그인 없이 열립니다.

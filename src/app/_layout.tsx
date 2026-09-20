@@ -44,6 +44,10 @@ export default function RootLayout() {
           <Stack.Screen name="review/write/[id]" />
           <Stack.Screen name="review/edit/[reviewId]" />
           <Stack.Screen name="collection/add/[id]" />
+          <Stack.Screen name="collection/[collectionItemId]" />
+          <Stack.Screen name="my-review" />
+          <Stack.Screen name="recommand" />
+          <Stack.Screen name="portfolio" />
         </Stack.Protected>
         <Stack.Protected guard={!isLoggedIn}>
           <Stack.Screen name="login" />
