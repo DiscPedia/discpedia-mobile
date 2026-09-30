@@ -2,10 +2,13 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import type { PageResponse } from '@/apis/commontype';
 import {
+  createReview,
   deleteReview,
   getAlbumReviews,
   likeReview,
   unlikeReview,
+  updateReview,
+  type CreateReviewRequest,
   type ReviewItem,
   type ReviewSort,
 } from '@/apis/review';
@@ -73,15 +76,40 @@ export const useToggleReviewLike = (aladinItemId: number, sort: ReviewSort) => {
   });
 };
 
-export const useDeleteReview = (aladinItemId: number) => {
+/** 리뷰가 바뀌면 목록과 별점 요약(앨범 상세)이 함께 바뀐다. */
+const useReviewInvalidation = (aladinItemId: number) => {
   const queryClient = useQueryClient();
+
+  return () => {
+    void queryClient.invalidateQueries({ queryKey: reviewKeys.album(aladinItemId) });
+    void queryClient.invalidateQueries({ queryKey: ['aladin', 'detail', aladinItemId] });
+  };
+};
+
+export const useDeleteReview = (aladinItemId: number) => {
+  const invalidate = useReviewInvalidation(aladinItemId);
 
   return useMutation({
     mutationFn: (reviewId: number) => deleteReview(reviewId),
-    onSuccess: () => {
-      // 리뷰 목록과 별점 요약(앨범 상세)이 함께 바뀐다.
-      void queryClient.invalidateQueries({ queryKey: reviewKeys.album(aladinItemId) });
-      void queryClient.invalidateQueries({ queryKey: ['aladin', 'detail', aladinItemId] });
-    },
+    onSuccess: invalidate,
+  });
+};
+
+export const useCreateReview = (aladinItemId: number) => {
+  const invalidate = useReviewInvalidation(aladinItemId);
+
+  return useMutation({
+    mutationFn: (request: CreateReviewRequest) => createReview(aladinItemId, request),
+    onSuccess: invalidate,
+  });
+};
+
+export const useUpdateReview = (aladinItemId: number) => {
+  const invalidate = useReviewInvalidation(aladinItemId);
+
+  return useMutation({
+    mutationFn: ({ reviewId, ...request }: CreateReviewRequest & { reviewId: number }) =>
+      updateReview(reviewId, request),
+    onSuccess: invalidate,
   });
 };

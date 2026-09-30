@@ -160,7 +160,12 @@ export default function DetailScreen() {
           onEdit={(review) =>
             router.push({
               pathname: '/review/edit/[reviewId]',
-              params: { reviewId: String(review.reviewId) },
+              params: {
+                reviewId: String(review.reviewId),
+                albumId: String(aladinItemId),
+                rating: String(review.rating),
+                content: review.content,
+              },
             })
           }
           onDelete={handleDeleteReview}

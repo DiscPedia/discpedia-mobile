@@ -97,8 +97,8 @@ src/
 | `/detail/:id`                   | `src/app/detail/[id].tsx`                       | 완료    |
 | `/collection/add/:id`           | `src/app/collection/add/[id].tsx`               | 자리만  |
 | `/collection/:collectionItemId` | `src/app/collection/[collectionItemId].tsx`     | 자리만  |
-| `/review/write/:id`             | `src/app/review/write/[id].tsx`                 | 자리만  |
-| `/review/edit/:reviewId`        | `src/app/review/edit/[reviewId].tsx`            | 자리만  |
+| `/review/write/:id`             | `src/app/review/write/[id].tsx`                 | 완료    |
+| `/review/edit/:reviewId`        | `src/app/review/edit/[reviewId].tsx`            | 완료    |
 | `/recommand`                    | `src/app/recommand.tsx`                         | 자리만  |
 | `/myReview`                     | `src/app/my-review.tsx`                         | 자리만  |
 | `/portfolio`                    | `src/app/portfolio.tsx`                         | 자리만  |
