@@ -1,14 +1,31 @@
-import { View } from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Text, View } from 'react-native';
 
 import BackHeader from '@/components/common/BackHeader';
-import ScreenPlaceholder from '@/components/common/ScreenPlaceholder';
+import FavoriteArtistPicker from '@/components/recommand/FavoriteArtistPicker';
+import { useFavoriteArtists } from '@/hooks/artists';
 
-/** 웹 RecommandPage 자리 — My 탭의 "관심 아티스트 관리"가 여기로 온다. */
 export default function RecommandScreen() {
+  // 웹은 로그인 직후 온보딩으로도 쓰지만, 앱은 My 탭의 관리 진입이 기본이다.
+  const { onboarding } = useLocalSearchParams<{ onboarding?: string }>();
+  const isOnboarding = onboarding === '1';
+  const router = useRouter();
+  const favorites = useFavoriteArtists();
+
   return (
-    <View className="flex-1 bg-[#F5F5F5]">
+    <View className="flex-1 bg-[#F5F5F6]">
       <BackHeader title="관심 아티스트" />
-      <ScreenPlaceholder title="아직 포팅 전입니다" />
+      {favorites.isPending ? (
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-sm text-[#8B8B93]">아티스트 불러오는 중...</Text>
+        </View>
+      ) : (
+        <FavoriteArtistPicker
+          initialSelectedIds={(favorites.data ?? []).map((item) => item.artistId)}
+          completeOnboarding={isOnboarding}
+          onSaved={() => (isOnboarding ? router.replace('/') : router.back())}
+        />
+      )}
     </View>
   );
 }

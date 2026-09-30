@@ -1,14 +1,15 @@
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import BackHeader from '@/components/common/BackHeader';
-import ScreenPlaceholder from '@/components/common/ScreenPlaceholder';
 
-/** 웹 PortfolioPage 자리 — My 탭의 "포트폴리오 변동 내역"이 여기로 온다. */
+/** 웹 PortfolioPage도 아직 자리 화면이라 같은 문구를 쓴다. */
 export default function PortfolioScreen() {
   return (
     <View className="flex-1 bg-[#F5F5F5]">
       <BackHeader title="포트폴리오" />
-      <ScreenPlaceholder title="아직 포팅 전입니다" />
+      <View className="flex-1 items-center justify-center">
+        <Text className="text-sm text-gray-500">2학기 추가 예정</Text>
+      </View>
     </View>
   );
 }
