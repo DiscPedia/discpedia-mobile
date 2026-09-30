@@ -118,7 +118,7 @@ EXPO_PUBLIC_DEV_BYPASS_AUTH=1
 
 ## 남은 작업
 
-- **OAuth 리다이렉트**: 백엔드 redirect_uri가 웹 콜백이면 앱으로 돌아오지 못합니다. `discpedia://login/oauth2/code/{provider}`로 돌아오도록 백엔드 지원이 필요합니다.
+- **OAuth 리다이렉트**: 백엔드는 요청의 `Origin` 헤더를 보고 복귀 주소를 정하는데, 앱 요청에는 Origin이 붙지 않아 기본값(localhost)이 내려옵니다. 앱은 `Origin: https://discpedia-frontend.vercel.app`를 직접 지정해 웹 콜백을 받고, 그 페이지가 `discpedia://`로 앱을 다시 여는 방식입니다. 웹 쪽 중계 PR(discpedia-frontend #17)이 머지·배포돼야 실제 로그인이 됩니다.
 - **폰트**: 로고용 Raleway는 넣었습니다(`@expo-google-fonts/raleway`, `font-raleway` 클래스). 본문용 Pretendard는 아직입니다.
 - **이미지**: 웹 `assets/common/Logo.svg`(PNG가 들어 있는 880KB SVG)와 `albumMock*.svg`(목데이터)는 가져오지 않았습니다. 로고는 PNG로 따로 넣는 것을 권장합니다.
 - 앱 아이콘/스플래시는 Expo 기본 이미지입니다.
