@@ -4,6 +4,8 @@ import { API_BASE_URL } from './api-config';
 
 type CallOptions = {
   skipAuth?: boolean;
+  /** 추가 헤더. OAuth 요청에서 Origin을 직접 지정할 때 쓴다. */
+  headers?: Record<string, string>;
 };
 
 export async function call(api: string, method: string, request?: unknown, option?: CallOptions) {
@@ -13,6 +15,9 @@ export async function call(api: string, method: string, request?: unknown, optio
   headers.set('Content-Type', 'application/json');
   if (accessToken && !option?.skipAuth) {
     headers.set('Authorization', `Bearer ${accessToken}`);
+  }
+  if (option?.headers) {
+    Object.entries(option.headers).forEach(([key, value]) => headers.set(key, value));
   }
 
   const url = `${API_BASE_URL}${api}`;
