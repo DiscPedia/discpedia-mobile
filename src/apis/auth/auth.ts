@@ -1,6 +1,7 @@
 import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
 
+import { oauthPending } from '@/lib/oauth-pending';
 import { useAuthStore } from '@/stores/auth';
 
 import type { ApiResponse } from '../commontype';
@@ -46,6 +47,9 @@ export function isAuthenticated(): boolean {
 /**
  * 인가 URL을 인앱 브라우저로 열고, 앱 스킴으로 돌아온 code/state로 JWT를 발급받는다.
  * 사용자가 브라우저를 닫으면 null을 반환한다.
+ *
+ * 브라우저가 열린 사이 앱이 종료될 수 있어(메모리가 부족한 안드로이드) state를 저장해 둔다.
+ * 그 경우 딥링크로 다시 켜진 앱이 resumeOAuthLogin으로 이어서 처리한다.
  */
 export async function startOAuthLogin(provider: OAuthProvider) {
   const res = (await call(
@@ -54,9 +58,11 @@ export async function startOAuthLogin(provider: OAuthProvider) {
     undefined,
     oauthCallOptions,
   )) as ApiResponse<OAuthAuthorizeResponse>;
+  await oauthPending.save(provider, res.data.state);
 
   const redirectUrl = Linking.createURL(`login/oauth2/code/${provider}`);
   const result = await WebBrowser.openAuthSessionAsync(res.data.authorizationUrl, redirectUrl);
+  await oauthPending.clear();
   if (result.type !== 'success') return null;
 
   const { code, state } = Linking.parse(result.url).queryParams ?? {};
@@ -67,6 +73,15 @@ export async function startOAuthLogin(provider: OAuthProvider) {
     throw new Error('OAuth state mismatch');
   }
 
+  return completeOAuthLogin(provider, code, state);
+}
+
+/** 앱이 종료됐다가 로그인 딥링크로 다시 켜졌을 때, 저장해 둔 state로 검증하고 로그인을 마친다. */
+export async function resumeOAuthLogin(provider: OAuthProvider, code: string, state: string) {
+  const pending = await oauthPending.take();
+  if (!pending || pending.provider !== provider || pending.state !== state) {
+    throw new Error('OAuth state mismatch');
+  }
   return completeOAuthLogin(provider, code, state);
 }
 

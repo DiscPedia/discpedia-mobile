@@ -51,6 +51,7 @@ export default function RootLayout() {
         </Stack.Protected>
         <Stack.Protected guard={!isLoggedIn}>
           <Stack.Screen name="login" />
+          <Stack.Screen name="oauth-callback" />
         </Stack.Protected>
       </Stack>
     </QueryClientProvider>

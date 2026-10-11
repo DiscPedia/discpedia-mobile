@@ -45,6 +45,12 @@
         "projectId": "e0b55a50-dc4c-4da7-b26b-4e5589f866da"
       }
     },
-    "owner": "evan7484"
+    "owner": "evan7484",
+    "runtimeVersion": {
+      "policy": "fingerprint"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/e0b55a50-dc4c-4da7-b26b-4e5589f866da"
+    }
   }
 }
