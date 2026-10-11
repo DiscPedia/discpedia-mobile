@@ -48,6 +48,12 @@ npm run format
 
 커밋 시 husky가 lint-staged(eslint --fix + prettier)를 실행합니다. 오류가 있으면 커밋이 막히니 해결하고 푸시해 주세요.
 
+## 업데이트 배포 (EAS Update)
+
+- **화면·로직만 바꾼 경우**: `npx eas-cli update --channel preview --message "<변경 내용>"` → 설치된 앱을 완전히 껐다 켜면 반영됩니다.
+- **네이티브 모듈을 추가·업그레이드한 경우**: 새로 빌드해야 합니다 (`npx eas-cli build -p android --profile preview`). 런타임 버전이 `fingerprint` 정책이라, 네이티브 구성이 다른 앱에는 업데이트가 내려가지 않습니다.
+- **주의**: 이 컴퓨터에서 Gradle로 직접 빌드(`expo run:android`, `./gradlew`)하면 빌드 도구가 `node_modules` 안의 라이브러리 파일(예: `AndroidManifest.xml`)을 고쳐 지문이 EAS와 달라집니다. 그 뒤에는 `npm ci`로 되돌린 다음 빌드·업데이트하세요.
+
 ## 폴더 구조
 
 ```

@@ -1,0 +1,15 @@
+# EAS Update 런타임 버전(fingerprint) 계산에서 제외할 경로.
+# 이 컴퓨터와 EAS에서 계산한 값이 다르면 빌드가 "Runtime version mismatch"로 실패한다.
+
+# CNG(managed) — android/ios는 prebuild 산출물이라 제외한다.
+android/**/*
+ios/**/*
+
+# 빌드 파이프라인 설정은 앱 바이너리 내용과 무관하다.
+# 지문에 넣으면 eas.json만 바꿔도 기존 설치본이 업데이트를 못 받게 된다.
+eas.json
+
+# 로컬 빌드 산출물
+*.apk
+*.aab
+*.ipa
