@@ -4,11 +4,14 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import AlarmIcon from '@/assets/icons/alarm.svg';
 import SettingIcon from '@/assets/icons/setting.svg';
+import { useUnreadNotificationCount } from '@/hooks/notifications';
 
 /** 웹 BackgroundPage의 상단 Header 대응 — 탭 레이아웃의 공통 헤더로 쓴다. */
 const Header = () => {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const unread = useUnreadNotificationCount();
+  const hasUnread = (unread.data ?? 0) > 0;
 
   return (
     <View className="w-full bg-white" style={{ paddingTop: insets.top }}>
@@ -22,8 +25,12 @@ const Header = () => {
         <View className="flex-row items-center gap-2">
           <Pressable
             accessibilityLabel="알림"
+            onPress={() => router.navigate('/notifications')}
             className="h-9 w-9 items-center justify-center rounded-full">
             <AlarmIcon width={24} height={24} />
+            {hasUnread && (
+              <View className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-[#ED732E]" />
+            )}
           </Pressable>
           <Pressable
             accessibilityLabel="설정"
