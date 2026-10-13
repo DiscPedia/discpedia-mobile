@@ -3,6 +3,8 @@ import { ActivityIndicator, Alert, Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { startOAuthLogin, type OAuthProvider } from '@/apis/auth/auth';
+import GoogleIcon from '@/assets/icons/google-g.svg';
+import KakaoIcon from '@/assets/icons/kakao-symbol.svg';
 
 export default function LoginScreen() {
   const [pending, setPending] = useState<OAuthProvider | null>(null);
@@ -32,7 +34,10 @@ export default function LoginScreen() {
           {pending === 'kakao' ? (
             <ActivityIndicator color="#000000" />
           ) : (
-            <Text className="text-base font-semibold text-black">카카오로 시작하기</Text>
+            <View className="flex-row items-center gap-3">
+              <KakaoIcon width={18} height={18} />
+              <Text className="text-base font-semibold text-black">카카오로 시작하기</Text>
+            </View>
           )}
         </Pressable>
         <Pressable
@@ -42,7 +47,10 @@ export default function LoginScreen() {
           {pending === 'google' ? (
             <ActivityIndicator color="#000000" />
           ) : (
-            <Text className="text-base font-semibold text-black">Google로 시작하기</Text>
+            <View className="flex-row items-center gap-3">
+              <GoogleIcon width={18} height={18} />
+              <Text className="text-base font-semibold text-black">Google로 시작하기</Text>
+            </View>
           )}
         </Pressable>
       </View>
