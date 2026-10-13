@@ -99,7 +99,8 @@ export async function completeOAuthLogin(provider: OAuthProvider, code: string, 
 
 export async function logout() {
   try {
-    await call('/api/v1/auth/logout', 'POST');
+    // 로그아웃은 refresh_token 쿠키만 읽는다. 만료된 토큰으로 401 → 재발급 경로를 타지 않게 한다.
+    await call('/api/v1/auth/logout', 'POST', undefined, { skipAuth: true });
   } catch {
     // 서버 실패해도 클라이언트는 로그아웃 처리
   } finally {

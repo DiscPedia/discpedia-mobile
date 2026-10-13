@@ -27,6 +27,11 @@ export default function RootLayout() {
     if (ready) void SplashScreen.hideAsync();
   }, [ready]);
 
+  // 로그아웃(직접 또는 만료)되면 이전 계정의 화면 데이터를 비운다.
+  useEffect(() => {
+    if (!isLoggedIn) queryClient.clear();
+  }, [isLoggedIn, queryClient]);
+
   // 토큰·폰트가 준비되기 전에는 스플래시를 유지한다.
   if (!ready) return null;
 
