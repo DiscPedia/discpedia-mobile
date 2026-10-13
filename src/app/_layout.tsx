@@ -48,6 +48,8 @@ export default function RootLayout() {
           <Stack.Screen name="my-review" />
           <Stack.Screen name="recommand" />
           <Stack.Screen name="portfolio" />
+          <Stack.Screen name="notifications" />
+          <Stack.Screen name="notification-settings" />
         </Stack.Protected>
         <Stack.Protected guard={!isLoggedIn}>
           <Stack.Screen name="login" />
